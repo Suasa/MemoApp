@@ -7,8 +7,12 @@ import SignupScreen from './src/screens/SignupScreen';
 import MemoListScreen from './src/screens/MemoListScreen';
 import MemoDetailScreen from './src/screens/MemoDetailScreen';
 import MemoEditScreen from './src/screens/MemoEditScreen';
+import MemoCreateScreen from './src/screens/MemoCreateScreen';
 
 import ENV from './env.json';
+
+// eslint-disable-next-line
+require("firebase/firestore");
 
 // eslint-disable-next-line
 const firebaseConfig = {
@@ -38,6 +42,9 @@ const App = createStackNavigator({
   },
   MemoEdit: {
     screen: MemoEditScreen,
+  },
+  MemoCreate: {
+    screen: MemoCreateScreen,
   },
 }, {
   // initialRouteName: 'Home',
