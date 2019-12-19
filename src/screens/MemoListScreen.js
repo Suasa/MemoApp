@@ -1,10 +1,10 @@
 import React from 'react';
 import { StyleSheet, View, Text } from 'react-native';
-import MemoList from '../components/MemoList';
-import CircleButton from '../elements/CircleButton';
+
 import firebase from 'firebase';
 
-// this.props.navigation.navigate('MemoEdit');
+import MemoList from '../components/MemoList';
+import CircleButton from '../elements/CircleButton';
 
 class MemoListScreen extends React.Component {
   state = {
@@ -18,23 +18,24 @@ class MemoListScreen extends React.Component {
       .then((snapshot) => {
         const memoList = [];
         snapshot.forEach((doc) => {
-          memoList.push(doc.data());
-        })
-        this.setState({ memoList })
+          memoList.push({...doc.data(), key: doc.id });
+        });
+        this.setState({ memoList });
       })
       .catch((error) => {
         console.log(error);
-      })
+      });
   }
   // selint-disable-next-line
   handlePress() {
+    // console.log(this.props);
     this.props.navigation.navigate('MemoCreate');
   }
 
   render() {
     return (
       <View style={styles.container}>
-        <MemoList memoList={this.state.memoList} />
+        <MemoList memoList={this.state.memoList} navigation={this.props.navigation} />
         <CircleButton name="plus" onPress={this.handlePress.bind(this)} />
       </View>
     );
